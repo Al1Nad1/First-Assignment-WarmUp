@@ -9,56 +9,46 @@ public class Exercises {
         return true;
     }
 
-    // Function for finding the index of fibo 
+
     public long fibonacciIndex(long n) {
         if (n < 0) return -1;
+
+        long a = 0, b = 1;
+        long index = 1;
+
         if (n == 0) return 0;
         if (n == 1) return 1;
-        
-        long a = 0, b = 1, index = 1;
+
         while (b < n) {
             long temp = b;
             b = a + b;
             a = temp;
-            
+            index++;
         }
-        return (b == n) ? index : -1;
+        if (b == n) {
+            return index;
+        } else {
+            return -1;
+        }
     }
 
-    // Function for triangle 
+
     public char[][] generateTriangle(int n) {
-        char[][] triangle = new char[n][n];
-        
+        if (n == 0) return new char[0][0];
+
+        char[][] triangle = new char[n][];
+
         for (int i = 0; i < n; i++) {
+            triangle[i] = new char[i + 1];
             for (int j = 0; j <= i; j++) {
-                if (j == 0 || j == i || i == n - 1) {
+                if (i == n - 1 || j == 0 || j == i) {
                     triangle[i][j] = '*';
                 } else {
                     triangle[i][j] = ' ';
                 }
             }
         }
+
         return triangle;
-    }
-
-    public static void main(String[] args) {
-        Exercises ex = new Exercises();
-
-        // Test isPrime function
-        System.out.println("Is 11 prime? " + ex.isPrime(11)); // true
-        System.out.println("Is 12 prime? " + ex.isPrime(12)); // false
-
-        // Test fibonacciIndex function
-        System.out.println("Fibonacci index of 5: " + ex.fibonacciIndex(5)); // 5
-        System.out.println("Fibonacci index of 7: " + ex.fibonacciIndex(7)); // -1
-
-        // Test generateTriangle function
-        char[][] triangle = ex.generateTriangle(5);
-        for (char[] row : triangle) {
-            for (char c : row) {
-                System.out.print(c == '\0' ? ' ' : c); // 2D triangle exactly like the one AMIN used 
-            }
-            System.out.println();
-        }
     }
 }
